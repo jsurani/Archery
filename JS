@@ -1,0 +1,49 @@
+let rounds = 5
+let arrows_per_round = 3
+let total_bullseyes = 0
+
+
+
+for(let round = 1; round <= rounds; round++) {
+	for (let arrow = 1; arrow <= arrows_per_round; arrow++) {
+		if (Math.floor(Math.random() * 3) + 1 === 1) {
+			printToScreen(`round ${round}, arrow${arrow} : X`)
+			total_bullseyes += 1
+		}
+ 		else {
+			printToScreen(`round ${round}, arrow ${arrow} : O `)
+		}
+	}
+}
+
+printToScreen(`Total bullseyes: ${total_bullseyes}`)
+
+
+
+
+
+function printToScreen(text) {
+	let r = Math.floor(Math.floor(Math.random() * 255 + 1));
+	let g = Math.floor(Math.floor(Math.random() * 255 + 1));
+	let b = Math.floor(Math.floor(Math.random() * 255 + 1));
+	const svg = d3
+		.select("body")
+		.append("svg")
+		.attr("width", 1500)
+		.attr("height", 75);
+
+	svg
+		.append("text")
+		.attr("y", 37.5)
+		.attr("width", 450)
+		.attr("height", 75)
+		.attr("x", -1000)
+		.attr("font-weight", "bold")
+		.attr("font-size", "20px")
+		.attr("fill", `rgb(${r},${g},${b}`)
+		.attr("font-family", "Roboto")
+		.text(text)
+		.transition()
+		.duration(1000)
+		.attr("x", 37.5);
+}
